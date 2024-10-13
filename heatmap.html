@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Interactive Heat Map with Risks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+        }
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(5, 160px);
+            grid-template-rows: repeat(5, 160px);
+            gap: 15px;
+            margin: 40px auto;
+            width: max-content;
+        }
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px; /* Increased font size for better readability */
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .low { background-color: #28a745; }
+        .medium { background-color: #ffc107; }
+        .high { background-color: #fd7e14; }
+        .very-high { background-color: #dc3545; }
+
+        .box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .description {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #555;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .axis-label {
+            grid-column: span 5;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .impact-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Enhanced Interactive Risk Heat Map</h1>
+
+<!-- Axis Labels for Likelihood and Impact -->
+<div style="display: flex; justify-content: center;">
+    <div class="vertical-text" style="margin-right: 20px;">Likelihood</div>
+    <div>
+        <div class="heatmap">
+            <!-- Row 5 (Very High Likelihood) -->
+            <div class="box very-high" onclick="showDescription('Certification Delays - Very High Risk')">Certification Delays</div>
+            <div class="box high" onclick="showDescription('Technology Failures - High Risk')">Technology Failures</div>
+            <div class="box high" onclick="showDescription('Vendor Reliability Issues - High Risk')">Vendor Issues</div>
+            <div class="box medium" onclick="showDescription('Budget Overruns - Medium Risk')">Budget Overruns</div>
+            <div class="box medium" onclick="showDescription('Staff Turnover - Medium Risk')">Staff Turnover</div>
+
+            <!-- Row 4 (High Likelihood) -->
+            <div class="box very-high" onclick="showDescription('Data Breach - Very High Risk')">Data Breach</div>
+            <div class="box high" onclick="showDescription('Regulatory Changes - High Risk')">Regulatory Changes</div>
+            <div class="box medium" onclick="showDescription('Training Issues - Medium Risk')">Training Issues</div>
+            <div class="box medium" onclick="showDescription('Infrastructure Delay - Medium Risk')">Infrastructure Delay</div>
+            <div class="box low" onclick="showDescription('Resource Constraints - Low Risk')">Resource Constraints</div>
+
+            <!-- Row 3 (Medium Likelihood) -->
+            <div class="box medium" onclick="showDescription('ISO Certification Delay - Medium Risk')">ISO Certification Delay</div>
+            <div class="box medium" onclick="showDescription('Compliance Risk - Medium Risk')">Compliance Risk</div>
+            <div class="box low" onclick="showDescription('Minor Bugs - Low Risk')">Minor Bugs</div>
+            <div class="box low" onclick="showDescription('Security Review - Low Risk')">Security Review</div>
+            <div class="box low" onclick="showDescription('Supply Chain Delays - Low Risk')">Supply Chain Delays</div>
+
+            <!-- Row 2 (Low Likelihood) -->
+            <div class="box low" onclick="showDescription('Market Change - Low Risk')">Market Change</div>
+            <div class="box low" onclick="showDescription('Skill Gap - Low Risk')">Skill Gap</div>
+            <div class="box low" onclick="showDescription('Customer Support - Low Risk')">Customer Support</div>
+            <div class="box low" onclick="showDescription('Small Vendor Issues - Low Risk')">Small Vendor Issues</div>
+            <div class="box low" onclick="showDescription('Team Collaboration - Low Risk')">Team Collaboration</div>
+
+            <!-- Row 1 (Very Low Likelihood) -->
+            <div class="box low" onclick="showDescription('Minor Delays - Very Low Risk')">Minor Delays</div>
+            <div class="box low" onclick="showDescription('Overtime Work - Very Low Risk')">Overtime Work</div>
+            <div class="box low" onclick="showDescription('Contractor Dispute - Very Low Risk')">Contractor Dispute</div>
+            <div class="box low" onclick="showDescription('Training Program Delay - Very Low Risk')">Training Program Delay</div>
+            <div class="box low" onclick="showDescription('Minimal Stakeholder Impact - Very Low Risk')">Minimal Stakeholder Impact</div>
+        </div>
+    </div>
+</div>
+<div class="impact-label" style="text-align: center;">Impact</div>
+
+<div class="description" id="description">Click on a risk to see its details.</div>
+
+<script>
+    function showDescription(text) {
+        document.getElementById("description").innerText = text;
+    }
+</script>
+
+</body>
+</html>
