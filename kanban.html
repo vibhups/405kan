@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Project Kanban Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .board {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+        .column {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            width: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+        }
+        .column h2 {
+            text-align: center;
+            color: #3498db;
+        }
+        .task {
+            background-color: #e7f4ff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #333;
+            cursor: grab;
+        }
+        .task.done {
+            background-color: #a0e7a7;
+        }
+        .task.in-progress {
+            background-color: #ffe599;
+        }
+        .task:hover {
+            background-color: #d1ecff;
+        }
+        .column {
+            border: 1px solid transparent;
+        }
+        .column.drag-over {
+            border-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interactive Kanban Board for ISO Certification and Expansion Project</h1>
+
+<div class="board">
+    <!-- To-Do Column -->
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>To-Do</h2>
+        <div class="task" draggable="true" ondragstart="drag(event)" id="task1">Project Initiation</div>
+        <div class="task" draggable="true" ondragstart="drag(event)" id="task2">Gap Analysis for ISO9001</div>
+        <div class="task" draggable="true" ondragstart="drag(event)" id="task3">Market Research</div>
+    </div>
+
+    <!-- In-Progress Column -->
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>In-Progress</h2>
+        <div class="task in-progress" draggable="true" ondragstart="drag(event)" id="task4">Develop QMS for ISO9001</div>
+        <div class="task in-progress" draggable="true" ondragstart="drag(event)" id="task5">ISO27001 Certification Prep</div>
+        <div class="task in-progress" draggable="true" ondragstart="drag(event)" id="task6">IT Infrastructure Setup</div>
+    </div>
+
+    <!-- Done Column -->
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>Done</h2>
+        <div class="task done" draggable="true" ondragstart="drag(event)" id="task7">Project Charter</div>
+        <div class="task done" draggable="true" ondragstart="drag(event)" id="task8">Stakeholder Identification</div>
+    </div>
+</div>
+
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+        ev.target.classList.add('drag-over');
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+        ev.target.classList.remove('drag-over');
+    }
+</script>
+
+</body>
+</html>
